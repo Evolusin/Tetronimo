@@ -8,9 +8,16 @@ class Tetris:
         self.app = app
         self.sprite_group = pg.sprite.Group()
         self.tetronimo = Tetronimo(self)
+        
+    def control(self, pressed_key):
+        if pressed_key == pg.K_LEFT:
+            self.tetronimo.move('LEFT')
+        elif pressed_key == pg.K_RIGHT:
+            self.tetronimo.move('RIGHT')
 
     def update(self):
-        self.tetronimo.update()
+        if self.app.anim_triger:
+            self.tetronimo.update()
         self.sprite_group.update()
         pass
 
