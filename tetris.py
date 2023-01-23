@@ -3,17 +3,18 @@ import math
 from tetronimo import Tetronimo
 import pygame as pg
 
+
 class Tetris:
     def __init__(self, app) -> None:
         self.app = app
         self.sprite_group = pg.sprite.Group()
         self.tetronimo = Tetronimo(self)
-        
+
     def control(self, pressed_key):
         if pressed_key == pg.K_LEFT:
-            self.tetronimo.move('LEFT')
+            self.tetronimo.move("LEFT")
         elif pressed_key == pg.K_RIGHT:
-            self.tetronimo.move('RIGHT')
+            self.tetronimo.move("RIGHT")
 
     def update(self):
         if self.app.anim_triger:

@@ -14,9 +14,9 @@ class Block(pg.sprite.Sprite):
 
         self.rect = self.image.get_rect()
 
-    def rect_update(self): 
+    def rect_update(self):
         self.rect.topleft = self.pos * TILE_SIZE
-        
+
     def update(self):
         self.rect_update()
 
@@ -34,4 +34,3 @@ class Tetronimo:
 
     def update(self):
         self.move(direction="DOWN")
-
