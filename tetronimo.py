@@ -20,6 +20,12 @@ class Block(pg.sprite.Sprite):
     def update(self):
         self.rect_update()
 
+    def is_coliding(self, pos):
+        x, y = int(pos.x), int(pos.y)
+        if 0 <= x < FIELD_W and y < FIELD_H:
+            return False
+        return True
+
 
 class Tetronimo:
     def __init__(self, tetris) -> None:
@@ -31,6 +37,9 @@ class Tetronimo:
         move_direction = MOVE_DIRECTIONS[direction]
         for block in self.blocks:
             block.pos += move_direction
+
+    def is_colliding(self, block_position):
+        return any(map(Block.is_coliding, self.blocks, block_position))
 
     def update(self):
         self.move(direction="DOWN")
