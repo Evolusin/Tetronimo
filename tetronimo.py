@@ -10,9 +10,14 @@ class Block(pg.sprite.Sprite):
 
         super().__init__(tetronimo.tetris.sprite_group)
         self.image = pg.Surface([TILE_SIZE, TILE_SIZE])
-        self.image.fill("orange")
+        pg.draw.rect(self.image, "red", (1, 1, TILE_SIZE, TILE_SIZE),border_radius=4)
 
         self.rect = self.image.get_rect()
+    
+    def rotate(self, pivot_pos):
+        trans = self.pos - pivot_pos
+        rotatetd = trans.rotate(90)
+        return rotatetd + pivot_pos    
 
     def rect_update(self):
         self.rect.topleft = self.pos * TILE_SIZE
@@ -51,6 +56,13 @@ class Tetronimo:
         elif direction == "DOWN":
             self.landing = True
 
+    def rotate_tetronimo(self):
+        pivot_pos = self.blocks[0].pos
+        new_block_positions = [block.rotate(pivot_pos) for block in self.blocks]
+        if not self.is_colliding(new_block_positions):
+            for block, pos in zip(self.blocks, new_block_positions):
+                block.pos = pos
+    
     def is_colliding(self, block_position):
         return any(map(Block.is_coliding, self.blocks, block_position))
 

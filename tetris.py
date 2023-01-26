@@ -33,6 +33,8 @@ class Tetris:
             self.tetronimo.move("LEFT")
         elif pressed_key == pg.K_RIGHT:
             self.tetronimo.move("RIGHT")
+        elif pressed_key == pg.K_SPACE:
+            self.tetronimo.rotate_tetronimo()
 
     def update(self):
         if self.app.anim_triger:
