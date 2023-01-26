@@ -13,8 +13,15 @@ class Block(pg.sprite.Sprite):
         pg.draw.rect(
             self.image, "red", (1, 1, TILE_SIZE, TILE_SIZE), border_radius=4
         )
-
+        self.alive = True
         self.rect = self.image.get_rect()
+        
+    '''Check if block is alive if not remove it from sprite group'''
+    def is_alive(self):
+        if self.alive == False:
+            self.kill()
+        else:
+            pass
 
     def rotate(self, pivot_pos):
         trans = self.pos - pivot_pos
@@ -25,6 +32,7 @@ class Block(pg.sprite.Sprite):
         self.rect.topleft = self.pos * TILE_SIZE
 
     def update(self):
+        self.is_alive()
         self.rect_update()
 
     def is_coliding(self, pos):
